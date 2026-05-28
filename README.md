@@ -1,8 +1,8 @@
 # DFRM
 
-It includes the implementation of DFRM (Dynamic Normalizing Flow for anomaly detection). Able to run on MVTec AD, BTAD, VisA, and ISBI2016 datasets.
+It includes the implementation of **DFRM** (Dynamic Normalizing Flow for anomaly detection). Able to run on **MVTec AD, BTAD, VisA**, and **ISBI2016** datasets.
 
-It also incorporates FAS (Few Anomaly Samples) training with segmentation head and edge detector.
+It also incorporates **FAS** (Few Anomaly Samples) training with segmentation head and edge detector.
 
 *This work is completed during internship at Newland AIDC.
 
@@ -162,6 +162,6 @@ Use `--measure_inference` to benchmark per-image latency (milliseconds) and thro
 
 ---
 
-## License
+## References
 
-This project is intended for research and educational purposes.
+This repo is mainly built based on BGAD [https://github.com/xcyao00/BGAD](https://github.com/xcyao00/BGAD) and FrEIA [https://github.com/VLL-HD/FrEIA](https://github.com/VLL-HD/FrEIA). Thanks for their great work!
