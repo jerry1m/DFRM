@@ -4,7 +4,7 @@ It includes the implementation of **DFRM** (Dynamic Normalizing Flow for anomaly
 
 It also incorporates **FAS** (Few Anomaly Samples) training with segmentation head and edge detector.
 
-*This work is completed during internship at Newland AIDC.
+***This work is completed during internship at Newland AIDC.**
 
 ---
 
