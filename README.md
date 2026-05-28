@@ -8,17 +8,6 @@ It also incorporates **FAS** (Few Anomaly Samples) training with segmentation he
 
 ---
 
-## Table of Contents
-
-- [Requirements](#requirements)
-- [Quick Start](#quick-start)
-  - [Data Preparation](#data-preparation)
-- [Datasets](#datasets)
-- [Results](#results)
-
-
----
-
 ## Requirements
 
 ### Core Dependencies
@@ -164,4 +153,4 @@ Use `--measure_inference` to benchmark per-image latency (milliseconds) and thro
 
 ## References
 
-This repo is mainly built based on BGAD [https://github.com/xcyao00/BGAD](https://github.com/xcyao00/BGAD) and FrEIA [https://github.com/VLL-HD/FrEIA](https://github.com/VLL-HD/FrEIA). Thanks for their great work!
+This repo is mainly built based on [BGAD](https://github.com/xcyao00/BGAD) and [FrEIA](https://github.com/VLL-HD/FrEIA). Thanks for their great work!
