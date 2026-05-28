@@ -10,30 +10,7 @@ def patch_ex(ima_dest, ima_src=None, same=False, num_patches=1,
              min_overlap_pct=0.25, shift=True, label_mode='binary', skip_background=None, tol=1, resize=True,
              gamma_params=None, intensity_logistic_params=(1/6, 20),
              resize_bounds=(0.7, 1.3), verbose=True):
-    """
-    Create a synthetic training example from the given images by pasting/blending random patches.
-    Args:
-        ima_dest (uint8 numpy array): image with shape (W,H,3) or (W,H,1) where patch should be changed
-        ima_src (uint8 numpy array): optional, otherwise use ima_dest as source
-        same (bool): use ima_dest as source even if ima_src given
-        mode: 'uniform', 'swap', 'mix', cv2.NORMAL_CLONE, or cv2.MIXED_CLONE what blending method to use
-             ('mix' is flip a coin between normal and mixed clone)
-        num_patches (int): how many patches to add. the method will always attempt to add the first patch,
-                    for each subsequent patch it flips a coin
-        width_bounds_pct ((float, float), (float, float)): min half-width of patch ((min_dim1, max_dim1), (min_dim2, max_dim2))
-        shift (bool): if false, patches in src and dest image have same coords. otherwise random shift
-        resize (bool): if true, patch is resampled at random size (within bounds and keeping aspect ratio the same) before blending  
-        skip_background (int, int) or [(int, int),]: optional, assume background color is first and only interpolate patches
-                    in areas where dest or src patch has pixelwise MAD < second from background.
-        tol (int): mean abs intensity change required to get positive label
-        gamma_params (float, float, float): optional, (shape, scale, left offset) of gamma dist to sample half-width of patch from,
-                    otherwise use uniform dist between 0.05 and 0.95
-        intensity_logistic_params (float, float): k, x0 of logitistc map for intensity based label
-        label_mode: 'binary', 
-                    'continuous' -- use interpolation factor as label (only when mode is 'uniform'),
-                    'intensity' -- use median filtered mean absolute pixelwise intensity difference as label,
-                    'logistic-intensity' -- use logistic median filtered of mean absolute pixelwise intensity difference as label,
-    """
+    
     if mode == 'mix':
         mode = (cv2.NORMAL_CLONE, cv2.MIXED_CLONE)[np.random.randint(2)]
 

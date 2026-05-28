@@ -11,10 +11,7 @@ class _FeatureInfo:
 
 
 class DFRMChannelModulator(nn.Module):
-    """DFRM (Dynamic Feature Refinement Module) — channel modulation submodule.
-
-    Dynamically enhance discriminative features and suppress background noise via residual channel modulation.
-    """
+    
 
     def __init__(self, channel, reduction=16):
         super().__init__()
@@ -34,14 +31,6 @@ class DFRMChannelModulator(nn.Module):
 
 
 class QuaternionBackbone(nn.Module):
-    """A small, compatible backbone that mimics timm's features_only behavior.
-
-    This is a lightweight quaternion-style CNN approximation: it uses real
-    Conv2d blocks but groups channels in 4 to reflect quaternion channel grouping.
-    The module exposes `feature_info.channels()` and returns a list of feature
-    maps in `forward`. DFRMChannelModulator layers are applied after each
-    stage's output and can be inspected via helper methods.
-    """
 
     def __init__(self, out_indices=None, pretrained=False, in_ch=3, se_reduction=16, disable_dfrm=False):
         super().__init__()
@@ -114,11 +103,7 @@ class QuaternionBackbone(nn.Module):
         return out
 
     def forward_with_dfrm_intermediates(self, x):
-        """Return tuple (pre_feats, post_feats) for feature comparison before/after DFRM modulation.
-
-        pre_feats: raw features before DFRM channel modulation
-        post_feats: refined features after DFRM channel modulation
-        """
+    
         pre = []
         post = []
         x = self.stem(x)
@@ -154,11 +139,7 @@ class QuaternionBackbone(nn.Module):
         return [dfrm.fc[2].weight.detach().cpu().clone() for dfrm in self.dfrm_modules]
 
     def get_dfrm_channel_importance(self):
-        """Compute DFRM channel importance scores for feature refinement analysis.
-
-        For each DFRM layer, returns a 1D tensor of length C where the importance
-        is computed as the L1 norm across the fc2 weights for that output channel.
-        """
+        
         imps = []
         for dfrm in self.dfrm_modules:
             w = dfrm.fc[2].weight.detach().cpu()  # (C, C//r)

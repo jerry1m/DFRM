@@ -5,7 +5,7 @@ __all__ = ['parse_args']
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description='SCOAF: Synergistic Co-Optimization Framework with Adaptive Boundary Contrastive Learning and Feature Refinement for Anomaly Detection')
+    parser = argparse.ArgumentParser(description='')
     parser.add_argument("--gpu", default='1', type=str, metavar='G',
                         help='GPU device number')
     
@@ -14,7 +14,7 @@ def parse_args():
                         help='dataset name: mvtec/btad/visa/isbi2016 (default: mvtec)')
     parser.add_argument('--test_dataset', default=None, type=str, metavar='D',
                         help='optional test dataset name for cross-domain evaluation (defaults to --dataset)')
-    parser.add_argument('--data_path', default='/home/luguanghui/PRNet/BGAD-improved/datasets/mvtec_anomaly_detection', type=str)
+    parser.add_argument('--data_path', default='./datasets/mvtec_anomaly_detection', type=str)
     parser.add_argument('--test_data_path', default=None, type=str,
                         help='optional test dataset root (defaults to --data_path)')
     parser.add_argument('--class_name', default='none', type=str, metavar='C',

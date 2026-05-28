@@ -4,11 +4,6 @@ import torch.nn as nn
 
 
 class DFRMChannelModulator(nn.Module):
-    """DFRM (Dynamic Feature Refinement Module) — Channel modulation sub-module.
-
-    Dynamically enhances discriminative features and suppresses background noise
-    via residual channel modulation (Squeeze-and-Excitation style).
-    """
 
     def __init__(self, channel, reduction=16):
         super().__init__()
@@ -28,18 +23,6 @@ class DFRMChannelModulator(nn.Module):
 
 
 class ResNetDFRMBackbone(nn.Module):
-    """DFRM-enhanced backbone — integrates DFRM channel modulation on timm features_only models.
-
-    Applies residual channel modulation and reconstruction constraints via DFRMChannelModulator
-    on each feature layer to suppress background noise and enhance discriminative features.
-
-    Args:
-        base_arch: str, timm model name (e.g. 'resnet50')
-        out_indices: list of 1-based indices specifying which feature maps to expose
-        pretrained: bool
-        se_reduction: int reduction ratio for channel modulation
-        disable_dfrm: if True, bypass DFRM modulation (ablation)
-    """
 
     def __init__(self, base_arch='resnet50', out_indices=None, pretrained=True, se_reduction=16, disable_dfrm=False):
         super().__init__()
@@ -66,11 +49,7 @@ class ResNetDFRMBackbone(nn.Module):
         return out
 
     def forward_with_dfrm_intermediates(self, x):
-        """Return (pre_feats, post_feats) — feature comparison before and after DFRM modulation.
-
-        pre_feats: raw features before DFRM channel modulation
-        post_feats: refined features after DFRM channel modulation
-        """
+        
         pre_feats = self.model(x)
         if self.disable_dfrm:
             return pre_feats, pre_feats
@@ -78,7 +57,7 @@ class ResNetDFRMBackbone(nn.Module):
         return pre_feats, post_feats
 
     def get_dfrm_channel_importance(self):
-        """Get channel importance scores of DFRM (for analyzing feature refinement effects)."""
+        
         imps = []
         for dfrm in self.dfrm_modules:
             w = dfrm.fc[2].weight.detach().cpu()

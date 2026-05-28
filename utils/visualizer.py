@@ -91,16 +91,7 @@ def generate_high_quality_mask(scores, threshold=0.5, min_size=20):
     # threshold -> binarization
     mask = (scores > threshold)
 
-    # remove small connected components
     mask = remove_small_objects(mask.astype(bool), min_size=min_size)
-
-    # use a larger structuring element for Opening (similar to original BGAD visualization behavior)
-    # try:
-    #     selem = morphology.disk(16)
-    #     mask = morphology.opening(mask, selem)
-    # except Exception:
-    #     # fallback to smaller structuring element in case of skimage version incompatibility
-    #     mask = morphology.opening(mask, morphology.square(3))
 
     return (mask.astype(np.uint8) * 255)
 
@@ -122,15 +113,6 @@ def overlay_mask(image, mask, color=(255, 0, 0), alpha=0.5):
     return image.astype(np.uint8)
 
 def extract_filename_info(file_path, img_type=None):
-    """
-    Generate a concise filename from a file path: use parent subfolder name + original filename (without extension).
-
-    Rules:
-    - Supports `str`, `pathlib.Path`, `list/tuple` (takes first element), etc.
-    - Normalizes Windows path separators.
-    - If a parent folder exists (e.g., .../test/good/000.png), returns "good_000".
-    - Otherwise returns the original filename without extension.
-    """
 
     # handle different input types (list/tuple/pathlib)
     if isinstance(file_path, (list, tuple)):

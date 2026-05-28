@@ -94,9 +94,7 @@ def setting_lr_parameters(args):
 
 
 def calculate_pro_metric(scores, gt_mask):
-    """
-    calculate segmentation AUPRO, from https://github.com/YoungGod/DFR
-    """
+    
     max_step = 1000
     expect_fpr = 0.3  # default 30%
     # guard against degenerate scores
